@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">YourMeditation</string>
+    <string name="frontend_url">https://webmeditations.pages.dev/</string>
+
+    <string name="no_connection_title">Отсутствует подключение</string>
+    <string name="no_connection_description">Приложение подключается к серверу для загрузки визуального и звукового сопровождения к медитации. Пожалуйста, подключитесь к сети, чтобы продолжить.</string>
+    <string name="no_connection_retry">Переподключиться</string>
+
+</resources>
