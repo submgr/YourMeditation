@@ -17,11 +17,14 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private WebView webView = null;
+    public static WebView webView = null;
+    public static WebView webview_loader = null;
+    public static String ShowOrHideWebViewInitialUse = "show";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.webView = (WebView) findViewById(R.id.webview);
+        webview_loader = (WebView) findViewById(R.id.webview_loader);
+        webview_loader.setWebChromeClient(new WebChromeClient());
+        webview_loader.loadUrl("file:///android_asset/loading.html");
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         webView.addJavascriptInterface(new MainActivityInterface(this), "Android");
 
-        webView.setWebChromeClient(new WebChromeClient());
 
         webView.loadUrl(getResources().getString(R.string.frontend_url));
     }

@@ -1,12 +1,18 @@
 package com.aramvirabyan.yourmeditation;
 
+import static com.aramvirabyan.yourmeditation.MainActivity.ShowOrHideWebViewInitialUse;
+import static com.aramvirabyan.yourmeditation.MainActivity.webView;
+import static com.aramvirabyan.yourmeditation.MainActivity.webview_loader;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -60,5 +66,24 @@ public class WebViewClientImpl extends WebViewClient {
             }
 
         }
+    }
+
+    @Override
+    public void onPageStarted(WebView webview, String url, Bitmap favicon) {
+
+        // only make it invisible the FIRST time the app is run
+        if (ShowOrHideWebViewInitialUse.equals("show")) {
+            webview.setVisibility(webview.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        ShowOrHideWebViewInitialUse = "hide";
+        webview_loader.setVisibility(View.GONE);
+
+        view.setVisibility(webView.VISIBLE);
+        super.onPageFinished(view, url);
+
     }
 }
